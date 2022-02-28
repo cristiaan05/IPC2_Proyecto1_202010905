@@ -22,12 +22,40 @@ class ListaPisos():
             self.fin=nuevoPiso
             # nuevoPiso.anterior=actual
             # self.fin=nuevoPiso
-        #return nuevo
+        return nuevoPiso
     
     def mostarPisos(self):
         actual = self.inicio
         for i in range(self.dimension):
-            print('Nombre:', actual.nombre, 'Filas:', actual.filas, 'Columnas: ',actual.columnas)
+            print('Nombre:', actual.nombre, 'Filas:', actual.filas, 'Columnas: ',actual.columnas
+                  ,'Costo Volteo:',actual.costoVolteo,'Costo Mov: ',actual.costoMov,'Patrones: ')
+            actual.patrones.mostrarPatrones()
+            actual = actual.siguiente
+    def mostarNombrePisos(self):
+        actual = self.inicio
+        for i in range(self.dimension):
+            print('***',i+1,'***  Nombre:', actual.nombre)
+            actual = actual.siguiente
+        return self.dimension
+    
+    # def recorrer(self,posicion):
+    #     actual= self.inicio
+    #     while actual != None:
+    #         x=1
+    #         while x <= int(self.dimension):
+    #             if posicion==x:
+    #                 print("Nombre: ",actual.nombre)
+    #                 # print("Nombre",actual.terreno.nombre,"Dimension:",actual.terreno.filas,", ",actual.terreno.columnas,"Posicion Inical:",actual.terreno.xPosInicio,", ",actual.terreno.yPosInicio,"Posicion Final: ",actual.terreno.xPosFinal,", ",actual.terreno.yPosFinal)
+    #         # actual.terreno.posiciones.getPosiciones()
+    #         actual=actual.siguiente
+    
+    def buscarPiso(self,nombrePiso):
+        actual = self.inicio
+        while actual != None:
+            if actual and actual.nombre==nombrePiso:
+                return actual.patrones
+                print("Nombre",actual.terreno.nombre,"Dimension:",actual.terreno.filas,", ",actual.terreno.columnas,"Posicion Inical:",actual.terreno.xPosInicio,", ",actual.terreno.yPosInicio,"Posicion Final: ",actual.terreno.xPosFinal,", ",actual.terreno.yPosFinal)
+                # print(f"Carne {actual.estudiante.carne} Nombre: {actual.estudiante.nombre} Correo{actual.estudiante.carne} Professión: {actual.estudiante.carrera}")
             actual = actual.siguiente
             
     # def getPosiciones(self):

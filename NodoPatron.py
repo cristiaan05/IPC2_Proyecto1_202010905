@@ -1,4 +1,10 @@
+from ListaAzulejo import ListaAzulejo
+
+
 class NodoPatron():
-    def __init__(self, codigo, cadena):
+    def __init__(self, codigo):
         self.codigo = codigo
-        self.cadena = cadena
+        self.listaAzulejos = ListaAzulejo()
+        self.siguiente=None
+        self.anterior=None
+        
