@@ -30,12 +30,19 @@ class ListaPatron():
         actual = self.inicio
         for i in range(self.dimension):
             print('Codigo:', actual.codigo)
-            actual.listaAzulejos.mostrarAzulejosPatron()
+            #actual.listaAzulejos.mostrarAzulejosPatron()
             actual = actual.siguiente
             
     def mostrarNombrePatron(self):
         actual = self.inicio
         for i in range(self.dimension):
-            print('\t','\t','***',i+1,'***  Codigo:', actual.codigo)
+            print('\t','\t','***  Codigo:', actual.codigo)
             actual = actual.siguiente
         return self.dimension
+
+    def buscarPatron(self,codigoPatron):
+        actual = self.inicio
+        while actual != None:
+            if actual and actual.codigo==codigoPatron:
+                return actual.listaAzulejos
+            actual = actual.siguiente

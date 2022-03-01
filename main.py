@@ -7,6 +7,7 @@ from ListaPatron import ListaPatron
 from ListaPisos import ListaPisos
 from NodoAzulejo import NodoAzulejo
 from NodoPatron import NodoPatron
+from Grafica import generarGraphviz
 
 def cargarArchivo():
     global path
@@ -22,6 +23,7 @@ def cargarArchivo():
 def procesarArchivo():
     global pisos
     global listaP
+    global filas,columnas
     listaP=ListaPisos()
     listaPatrones=ListaPatron()
     archivo=str(path)
@@ -63,43 +65,85 @@ def procesarArchivo():
             #for c in cursos:
             #    print('-',c.firstChild.data)
         #ListaPisos.mostarPisos()
+    print("\n")
     print("Exito agregando pisos!!!")
     #listaP.mostarPisos()
 
     
 
 def mostrarPatronesPiso():
-    global listaP
+    global listaP,p,opcionPiso,s
     print('*************PISOS CARGADOS*********************')
     # listaP.mostarNombrePisos()
     s=listaP.mostarNombrePisos()
-    opcion=input("Ingrese el nombre del piso que desea ver: ")
-    p=listaP.buscarPiso(str(opcion))
-    if p==None:
+    print("***  Presione V para volver al menu anterior")
+    opcionPiso=input("Ingrese el nombre del piso que desea ver: ")
+    if opcionPiso.lower()=="v" or opcionPiso.lower()=="volver":
+        menuPrincipal()
+    else:  
+        p=listaP.buscarPiso(str(opcionPiso))
+        if p==None:
+            print("\n")
+            print("El piso que selecciono no existe, por favor intente de nuevo")
+            mostrarPatronesPiso()
+        elif p!=None:
+            patronesPisoS()
+            #mostrarPatronesPiso()
+            # mostrarPisos()
+def patronesPisoS():
+    global p,opcionPiso,a
+    print('\t','------PATRONES DEL PISO: '+opcionPiso+'------')
+    p[0].mostrarNombrePatron()
+    print('\t','\t','***  Presione V para volver al menu anterior')
+    opcion=input('\t'+"Ingrese el nombre del patron que desea: ")
+    if opcion.lower()=="v" or opcion.lower()=="volver":
         mostrarPatronesPiso()
-    elif p!=None:
-        print('\t','------PATRONES DEL PISO:',opcion+'------')
-        p.mostrarNombrePatron()
-        # mostrarPisos()
+    else:
+        mostrarMenuPatrones(opcion)
+        # a=p[0].buscarPatron(opcion)
+        
 
 def mostrarMenuPatrones(codigo):
-    print('\t','1----Mostrar Patron-----')
-    print('\t','1----Mostrar Patron-----')
+    global p,a,opcionPiso
+    print('\t','----Menú Patron--',codigo+'---')
+    print('\t','1----Mostrar Patron')
+    print('\t','2----Cambiar Por Un Nuevo Patron')
+    print('\t','3----Volver a Menu Anterior')
+    opcion=input("---Ingresa la Opcion que desea: ")
+    if opcion=="1":
+        # p[0].buscarPatron(codigo).mostrarAzulejosPatron()
+        filasP=p[1]
+        columnasP=p[2]
+        generarGraphviz(p[0].buscarPatron(codigo),opcionPiso,filasP,columnasP)
+        # patronSelect=listaPa.buscarPatron(codigo)
+        # patronSelect.mostrarAzulejosPatron()
+        mostrarMenuPatrones(codigo)
+        
+    elif opcion=="2":
+        print("Instrucciones")
+    elif opcion=="3":
+        patronesPisoS()
+    else:
+        print("Opcion no valida por favor intente de nuevo")
+        mostrarMenuPatrones()
+        
+        
+    
+    
 def menuPrincipal():
     print("******************MENÚ*********PRINCIPAL****************")
     print("**  1--Cargar Archivo")
     print("**  2--Mostrar Pisos Cargados")
     print("**  3--Salir")
     print("********************************************************")
-    print("Ingrese la opcion: ")
-    opcion=input()
+    opcion=input("Ingrese la opcion: ")
+    print("\n")
     if opcion =="1":
         cargarArchivo()
         procesarArchivo()
         menuPrincipal()
     elif opcion=="2":
         mostrarPatronesPiso()
-        
     elif opcion=="3":
         print("**************Gracias,Vuelva Pronto***********")
         exit()

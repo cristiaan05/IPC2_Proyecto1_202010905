@@ -34,7 +34,7 @@ class ListaPisos():
     def mostarNombrePisos(self):
         actual = self.inicio
         for i in range(self.dimension):
-            print('***',i+1,'***  Nombre:', actual.nombre)
+            print('***  Nombre:', actual.nombre)
             actual = actual.siguiente
         return self.dimension
     
@@ -53,7 +53,7 @@ class ListaPisos():
         actual = self.inicio
         while actual != None:
             if actual and actual.nombre==nombrePiso:
-                return actual.patrones
+                return actual.patrones,actual.filas,actual.columnas
                 print("Nombre",actual.terreno.nombre,"Dimension:",actual.terreno.filas,", ",actual.terreno.columnas,"Posicion Inical:",actual.terreno.xPosInicio,", ",actual.terreno.yPosInicio,"Posicion Final: ",actual.terreno.xPosFinal,", ",actual.terreno.yPosFinal)
                 # print(f"Carne {actual.estudiante.carne} Nombre: {actual.estudiante.nombre} Correo{actual.estudiante.carne} Professión: {actual.estudiante.carrera}")
             actual = actual.siguiente
