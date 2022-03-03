@@ -53,7 +53,7 @@ class ListaPisos():
         actual = self.inicio
         while actual != None:
             if actual and actual.nombre==nombrePiso:
-                return actual.patrones,actual.filas,actual.columnas
+                return actual.patrones,actual.filas,actual.columnas,actual.costoMov,actual.costoVolteo
                 print("Nombre",actual.terreno.nombre,"Dimension:",actual.terreno.filas,", ",actual.terreno.columnas,"Posicion Inical:",actual.terreno.xPosInicio,", ",actual.terreno.yPosInicio,"Posicion Final: ",actual.terreno.xPosFinal,", ",actual.terreno.yPosFinal)
                 # print(f"Carne {actual.estudiante.carne} Nombre: {actual.estudiante.nombre} Correo{actual.estudiante.carne} Professión: {actual.estudiante.carrera}")
             actual = actual.siguiente

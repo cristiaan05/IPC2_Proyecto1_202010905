@@ -2,7 +2,7 @@
         digraph L{
             node[shape=box fillcolor="#FFEDBB" style=filled]
             nodesep=0.02;
-            ranksep=0.00;
+            ranksep=0.02;
             subgraph cluster_p{
                 label ="Nombre Piso: ejemplo01"
                 bgcolor="#398D9C"

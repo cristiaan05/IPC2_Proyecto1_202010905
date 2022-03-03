@@ -2,13 +2,13 @@ from os import startfile, system
 
 
 def generarGraphviz(posiciones,nombre,m,n):
-        print("m",m,n)
+        # print("m",m,n)
         m=int(m)+1
         n=int(n)+1
         x="hola"
         
         # print(posiciones.mostrarAzulejosPatron())
-        print("hola")
+        # print("hola")
         
         graphviz='''
         digraph L{
@@ -57,15 +57,15 @@ def generarGraphviz(posiciones,nombre,m,n):
                 '''
                 fila=fila+1
             
-        for col in range(1,int(n)):
-            # grupo=2
-            for fi in range(1,int(m)):
-                grupo=2
-                if int(grupo)<int(m-1):  
-                    graphviz=graphviz+'''
-                        nodo'''+str(fi)+'''_'''+str(col)+'''->nodo'''+str(grupo)+'''_'''+str(col)+'''[dir=none color="#398D9C"]
-                    '''
-                    grupo=grupo+1
+        # for col in range(1,int(n)):
+        #     # grupo=2
+        #     for fi in range(1,int(m)):
+        #         grupo=2
+        #         if int(grupo)<int(m-1):  
+        #             graphviz=graphviz+'''
+        #                 nodo'''+str(fi)+'''_'''+str(col)+'''->nodo'''+str(grupo)+'''_'''+str(col)+'''[dir=none color="#398D9C"]
+        #             '''
+        #             grupo=grupo+1
         
                
                 

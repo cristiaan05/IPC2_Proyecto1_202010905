@@ -1,3 +1,4 @@
+from turtle import pos
 from NodoAzulejo import NodoAzulejo
 
 class ListaAzulejo():
@@ -54,6 +55,78 @@ class ListaAzulejo():
                         grupo=grupo+1
                     actual=actual.siguiente
         return graphviz
+    
+    
+    def compararXCuadrito(self,x):
+        if x==0:
+            actual=self.inicio
+            return actual.posX,actual.posY,actual.color
+        elif x>=1:
+            y=0
+            actual=self.inicio
+            while y!=x:
+                actual = actual.siguiente
+                y+=1
+            #print('PosX:', actual.posX,'PosY:',actual.posY,'Color:',actual.color)
+            return actual.posX,actual.posY,actual.color
+    
+    def modificarAzulejo(self,color,posx,posy,contador):
+        if contador==0:
+            actual = self.inicio
+        elif contador>=1:
+            y=0
+            actual=self.inicio
+            while y<contador:
+                actual = actual.siguiente
+                y+=1
+        if actual != None:
+            # if actual and actual.posX == posx and actual.posY==posy:
+            actualC=actual.siguiente
+            if actualC!=None:
+                if actualC.color==color:
+                    aux=actual.color
+                    actualC.color=aux
+                    actual.color=color
+                    actual=actual.siguiente
+                    print("mov")
+                    return "M"
+                else:   
+                    while posx!=actual.posX and actual.posY!=(str(posy+1)):
+                        actualD=actual.siguiente
+                    if actual.color==color:
+                        aux=actual.color
+                        actualD.color=aux
+                        actual.color=color
+                        actual=actual.siguiente
+                        
+                    else:
+                        print("volteo")
+                        actual.color=color
+                        actual = actual.siguiente
+                        return "V"
+            else:
+                actualC=actual
+                if actual.color==color:
+                    aux=actual.color
+                    actualC.color=aux
+                    actual.color=color
+                    actual=actual.siguiente
+                    print("mov")
+                    return "M"
+                else:
+                    while posx!=actual.posX and actual.posY!=(str(posy+1)):
+                        actualD=actual.siguiente
+                    if actual.color==color:
+                        aux=actual.color
+                        actualD.color=aux
+                        actual.color=color
+                        actual=actual.siguiente
+                    else:
+                        print("volteo")
+                        actual.color=color
+                        actual = actual.siguiente
+                        return "V"
+    
             
     # def buscarAxulejoPatron(self,nombrePiso):
     #     actual = self.inicio

@@ -36,7 +36,7 @@ class ListaPatron():
     def mostrarNombrePatron(self):
         actual = self.inicio
         for i in range(self.dimension):
-            print('\t','\t','***  Codigo:', actual.codigo)
+            print('\t','\t',str(i+1)+'--- Codigo:', actual.codigo)
             actual = actual.siguiente
         return self.dimension
 
@@ -46,3 +46,7 @@ class ListaPatron():
             if actual and actual.codigo==codigoPatron:
                 return actual.listaAzulejos
             actual = actual.siguiente
+    
+    def getPatronDefecto(self):
+        actual = self.inicio
+        return actual.codigo
