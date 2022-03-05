@@ -4,18 +4,26 @@
             nodesep=0.02;
             ranksep=0.02;
             subgraph cluster_p{
-                label ="Nombre Piso: ejemplo01"
+                label ="Nombre Piso: Aiso 3"
                 bgcolor="#398D9C"
                 edge[dir="none"]//permite poner flechas para ambos lados
                 
-                        nodo1_1[label="",fillcolor=black,group=0]
+                        nodo1_1[label="",fillcolor=white,group=0]
                         nodo1_2[label="",fillcolor=white,group=0]
-                        nodo1_3[label="",fillcolor=black,group=0]
+                        nodo1_3[label="",fillcolor=white,group=0]
                         nodo1_4[label="",fillcolor=white,group=0]
                         nodo2_1[label="",fillcolor=white,group=0]
-                        nodo2_2[label="",fillcolor=white,group=0]
+                        nodo2_2[label="",fillcolor=black,group=0]
                         nodo2_3[label="",fillcolor=white,group=0]
-                        nodo2_4[label="",fillcolor=white,group=0]
+                        nodo2_4[label="",fillcolor=black,group=0]
+                        nodo3_1[label="",fillcolor=black,group=0]
+                        nodo3_2[label="",fillcolor=white,group=0]
+                        nodo3_3[label="",fillcolor=black,group=0]
+                        nodo3_4[label="",fillcolor=white,group=0]
+                        nodo4_1[label="",fillcolor=white,group=0]
+                        nodo4_2[label="",fillcolor=black,group=0]
+                        nodo4_3[label="",fillcolor=white,group=0]
+                        nodo4_4[label="",fillcolor=white,group=0]
                         nodo1_1->nodo1_2[dir=none color="#398D9C"]
                     
                         nodo1_2->nodo1_3[dir=none color="#398D9C"]
@@ -27,6 +35,18 @@
                         nodo2_2->nodo2_3[dir=none color="#398D9C"]
                     
                         nodo2_3->nodo2_4[dir=none color="#398D9C"]
+                    
+                        nodo3_1->nodo3_2[dir=none color="#398D9C"]
+                    
+                        nodo3_2->nodo3_3[dir=none color="#398D9C"]
+                    
+                        nodo3_3->nodo3_4[dir=none color="#398D9C"]
+                    
+                        nodo4_1->nodo4_2[dir=none color="#398D9C"]
+                    
+                        nodo4_2->nodo4_3[dir=none color="#398D9C"]
+                    
+                        nodo4_3->nodo4_4[dir=none color="#398D9C"]
                     
                 {rank=same;
                     nodo1_1,
@@ -42,13 +62,43 @@
                     nodo2_4
                 }    
             
+                {rank=same;
+                    nodo3_1,
+                    nodo3_2,
+                    nodo3_3,
+                    nodo3_4
+                }    
+            
+                {rank=same;
+                    nodo4_1,
+                    nodo4_2,
+                    nodo4_3,
+                    nodo4_4
+                }    
+            
                     nodo1_1->nodo2_1[dir=none color="#398D9C"];
+                
+                    nodo2_1->nodo3_1[dir=none color="#398D9C"];
+                
+                    nodo3_1->nodo4_1[dir=none color="#398D9C"];
                 
                     nodo1_2->nodo2_2[dir=none color="#398D9C"];
                 
+                    nodo2_2->nodo3_2[dir=none color="#398D9C"];
+                
+                    nodo3_2->nodo4_2[dir=none color="#398D9C"];
+                
                     nodo1_3->nodo2_3[dir=none color="#398D9C"];
                 
+                    nodo2_3->nodo3_3[dir=none color="#398D9C"];
+                
+                    nodo3_3->nodo4_3[dir=none color="#398D9C"];
+                
                     nodo1_4->nodo2_4[dir=none color="#398D9C"];
+                
+                    nodo2_4->nodo3_4[dir=none color="#398D9C"];
+                
+                    nodo3_4->nodo4_4[dir=none color="#398D9C"];
                 
         
     }

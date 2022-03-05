@@ -70,7 +70,7 @@ class ListaAzulejo():
             #print('PosX:', actual.posX,'PosY:',actual.posY,'Color:',actual.color)
             return actual.posX,actual.posY,actual.color
     
-    def modificarAzulejo(self,color,posx,posy,contador):
+    def modificarAzulejo(self,color,posx,posy,contador,columnas):
         if contador==0:
             actual = self.inicio
         elif contador>=1:
@@ -80,30 +80,77 @@ class ListaAzulejo():
                 actual = actual.siguiente
                 y+=1
         if actual != None:
-            # if actual and actual.posX == posx and actual.posY==posy:
+            # if actual and actual.posX == posx and actual.posY==posy: W     W b
             actualC=actual.siguiente
+            actualA=actual
             if actualC!=None:
                 if actualC.color==color:
-                    aux=actual.color
-                    actualC.color=aux
-                    actual.color=color
-                    actual=actual.siguiente
-                    print("mov")
-                    return "M"
-                else:   
-                    while posx!=actual.posX and actual.posY!=(str(posy+1)):
-                        actualD=actual.siguiente
-                    if actual.color==color:
+                    for i in range(int(columnas)):
+                            if actualA.siguiente != None:
+                                actualA = actualA.siguiente
+                    if actualA.color==color:
                         aux=actual.color
-                        actualD.color=aux
+                        actualA.color=aux
                         actual.color=color
                         actual=actual.siguiente
-                        
-                    else:
-                        print("volteo")
+                        i=""+str(actualA.posX)
+                        j=""+str(actualA.posY)
+                        print("mov")
+                        print("no debio entrar aca")
+                        return "M",i,j
+                    else: 
+                        aux=actual.color
+                        actualC.color=aux
                         actual.color=color
-                        actual = actual.siguiente
-                        return "V"
+                        actual=actual.siguiente
+                        # casilla=actualC.color
+                        i=""+str(actualC.posX)
+                        j=""+str(actualC.posY)
+                        print("mov")
+                        return "M",i,j
+                else:
+                    actualAbajo=actual
+                    # for i in range(int(columnas)):
+                    #     if actualC.siguiente!=None:
+                    #         print(actualC.siguiente)
+                    for i in range(int(columnas)):
+                            if actualAbajo.siguiente != None:
+                                actualAbajo = actualAbajo.siguiente
+                    if actualAbajo.color==color:
+                        aux=actual.color
+                        actualAbajo.color=aux
+                        actual.color=color
+                        actual=actual.siguiente
+                        i=""+str(actualAbajo.posX)
+                        j=""+str(actualAbajo.posY)
+                        print("mov")
+                        return "M",i,j
+                    else:
+                        actualAbajo=actual
+                        actualN=actual
+                        for i in range(int(columnas)):
+                            if actualAbajo.siguiente != None:
+                                actualAbajo = actualAbajo.siguiente
+                        # print("------------"+actualAbajo.color)
+                        # actual=actualN
+                        # print("abajo",actualAbajo.posX,actualAbajo.posY)
+                        # print("POSICION",actual.posX,actual.posY)
+                        if actualAbajo.color==color:
+                            aux=actual.color
+                            actualAbajo.color=aux
+                            actual.color=color
+                            actual=actual.siguiente
+                            i=""+str(actualAbajo.posX)
+                            j=""+str(actualAbajo.posY)
+                            print("mov")
+                            return "M",i,j
+                        else:    
+                            print("volteo")
+                            actual.color=color
+                            i=""+str(actual.posX)
+                            j=""+str(actual.posY)
+                            actual = actual.siguiente
+                            return "V",i,j
             else:
                 actualC=actual
                 if actual.color==color:
@@ -111,28 +158,28 @@ class ListaAzulejo():
                     actualC.color=aux
                     actual.color=color
                     actual=actual.siguiente
+                    i=""+str(actualC.posX)
+                    j=""+str(actualC.posY)
                     print("mov")
-                    return "M"
+                    return "M",i,j
                 else:
-                    while posx!=actual.posX and actual.posY!=(str(posy+1)):
-                        actualD=actual.siguiente
+                    actualAbajo=actual
+                    for i in range(int(columnas)):
+                            if actualAbajo.siguiente != None:
+                                actualAbajo = actualAbajo.siguiente
                     if actual.color==color:
                         aux=actual.color
-                        actualD.color=aux
+                        actualAbajo.color=aux
                         actual.color=color
                         actual=actual.siguiente
+                        i=""+str(actualAbajo.posX)
+                        j=""+str(actualAbajo.posY)
+                        print("mov")
+                        return "M",i,j
                     else:
-                        print("volteo")
                         actual.color=color
+                        i=""+str(actual.posX)
+                        j=""+str(actual.posY)
                         actual = actual.siguiente
-                        return "V"
-    
-            
-    # def buscarAxulejoPatron(self,nombrePiso):
-    #     actual = self.inicio
-    #     while actual != None:
-    #         if actual and actual.nombre==nombrePiso:
-    #             return actual.patrones
-    #             print("Nombre",actual.terreno.nombre,"Dimension:",actual.terreno.filas,", ",actual.terreno.columnas,"Posicion Inical:",actual.terreno.xPosInicio,", ",actual.terreno.yPosInicio,"Posicion Final: ",actual.terreno.xPosFinal,", ",actual.terreno.yPosFinal)
-    #             # print(f"Carne {actual.estudiante.carne} Nombre: {actual.estudiante.nombre} Correo{actual.estudiante.carne} Professión: {actual.estudiante.carrera}")
-    #         actual = actual.siguiente
+                        print("volteo")
+                        return "V",i,j

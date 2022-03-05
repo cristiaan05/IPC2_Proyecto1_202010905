@@ -1,5 +1,4 @@
 
-from importlib.metadata import FileHash
 from xml.dom import minidom
 from ListaAzulejo import ListaAzulejo
 from ListaPatron import ListaPatron
@@ -175,7 +174,7 @@ def graficarPiso(codigo):
     menuXPiso(p)
     
 def cambiarPatron(codPatronDefecto,codPatronNuevo):
-    global p
+    global p,Total,instrucciones
     patronDefecto=p[0].buscarPatron(codPatronDefecto)
     patronN=p[0].buscarPatron(codPatronNuevo)
     filas=p[1]
@@ -185,25 +184,29 @@ def cambiarPatron(codPatronDefecto,codPatronNuevo):
     Total=0
     # for x in filas:
     #     patronN=p[0].buscarPatron(codPatronNuevo)
-    patronDefecto.listaAzulejoPatron()
-    print("--------------------------------------")
-    patronN.listaAzulejoPatron()
+    # patronDefecto.listaAzulejoPatron()
+    # print("--------------------------------------")
+    # patronN.listaAzulejoPatron()
     contador=0
     aux=0
+    instrucciones=""
     for x in range(int(filas)):
         for y in range(int(columnas)):
-            print("recorrido--",y)
+            # print("recorrido--",y)
             X=patronDefecto.compararXCuadrito(contador)
             Y=patronN.compararXCuadrito(contador)
-            print(X[2]+"----"+Y[2])
+            # print(X[2]+"----"+Y[2])
             if Y[2]==X[2]:
                 print("")
                 # patronDefecto.modificarAzulejo(aux,X[0],X[1])
             elif X[2]!=Y[2]:
-                costo=patronDefecto.modificarAzulejo(Y[2],X[0],X[1],contador)
-                if costo=="M":
+                costo=patronDefecto.modificarAzulejo(Y[2],X[0],X[1],contador,columnas)
+                if costo[0]=="M":
+                    # print(costo[1])
+                    instrucciones=instrucciones+"Se intercambio la casilla en la posicion "+str(X[0])+"_"+str(X[1])+" con la casilla "+str(costo[1])+"_"+str(costo[2])+"* Costo: Q "+costoM+"\n"
                     Total+=int(costoM)
-                elif costo=="V":
+                elif costo[0]=="V":
+                    instrucciones=instrucciones+"Se Volteo el color de la casilla en la posicion "+str(X[0])+"_"+str(X[1])+"* Costo: Q "+costoV+"\n"
                     Total+=int(costoV)
                 aux+=1
                 if aux>=(int(filas)*int(columnas)):
@@ -213,12 +216,96 @@ def cambiarPatron(codPatronDefecto,codPatronNuevo):
                 break
         if contador>=(int(filas)*int(columnas)):
             break
-    print("----------------PATRON CAMBIADO------------")
-    patronDefecto.listaAzulejoPatron()        
-    print("--azulejos distintos",aux)
-    print("---Costo Operacion---",Total)           
-        # comparacion=patronDefecto.compararXCuadrito()
-    menuXPiso(p)
+    Instrucciones()
+    # print("----------------PATRON CAMBIADO------------")
+    # patronDefecto.listaAzulejoPatron()        
+    # print("--azulejos distintos",aux)
+    
+def Instrucciones():
+        global instrucciones,Total
+        print("¿Como desea ver las instrucciones?")
+        print("1---En consola")
+        print("2---Un archivo HTML")
+        print("3---No deseo verlas, volver al menu anterior")
+        opcion=input("Ingrese la opcion: ")
+        if opcion=="1":
+            print("----------------INSTRUCCIONES------------")
+            print(instrucciones)
+            print("---Costo Operacion---",Total)
+                # comparacion=patronDefecto.compararXCuadrito()
+            menuXPiso(p)
+        elif opcion=="2":
+            instruccionesHTML()
+        elif opcion=="3":
+            menuCambiarPatron()
+        else:
+            print("Error, intentelo de nuevo")
+            Instrucciones()
+
+
+def instruccionesHTML():
+    global instrucciones,Total
+    try:
+        print("Su reporte fue generado, verificar".center(50, "-"))
+        file = open("Reporte.html", "w")
+        imprimir = f"""
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="main.css" type="text/css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                <title>INSTRUCCIONES CAMBIO DE PATRON</title>
+                </head>
+                <body>
+                    <h2 id="Titulosecundario" align="center">Cristian Fernando Hernandez Tello 202010905</h2>
+                    <div class="titulo">
+                       <li class="curso">Instrucciones Cambio de Patron</li>
+                    </div>
+                    <div class="container">
+                    <div class="table table-striped centered">
+                        <table class="tabla centered">
+                            <tr>
+                                <th>Instruccion</th>
+                                <th>Costo</th>
+                            </tr>
+                """
+        # Tabla Alumnos asignados
+        file.write(imprimir)
+        instru=instrucciones.split('\n')
+        # i=""
+        # c=""
+        # for x in range(len(instru)-1):
+        #     p=instru[x].split('*')
+        #     i=i+p[0]
+        #     c=c+p[1]
+        #     print("--",instru[x])
+        
+        for x in range(len(instru)-1):
+            p=instru[x].split('*')
+            fila = f"""
+                <tr>
+                    <td>{p[0]}</td>
+                    <td>{p[1]}</td>
+                </tr>
+                    """
+            valor = fila
+            file.write(valor)
+        t=f"""
+            <tr>
+                <td>TOTAL</td>
+                <td>Q.{Total}</td>
+            </tr>
+        """
+        file.write(t)
+        file.close()
+        Instrucciones()
+    except:
+        print(f"Algo malo paso".center(50, "!"))
+    
         
     
 def menuPrincipal():
